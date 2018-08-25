@@ -1,0 +1,16 @@
+#过滤/～/目录下的所有文件
+/*/*
+#只保留/～/目录下的所有.cpp文件
+!/*/*.cpp
+
+#过滤/目录下的所有带后缀名的文件
+/*.*
+
+#只保留.gitignore文件
+!.gitignore
+
+#只保留LICENSE文件
+!LICENSE
+
+#只保留README.md文件
+!README.md
