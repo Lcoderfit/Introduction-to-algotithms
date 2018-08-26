@@ -1,13 +1,17 @@
 #include<iostream>
+//容器
 #include<vector>
 using namespace std;
 
+//用于存放最优代价和最优分割方案
 class MatrixAndPrint{
 public:
     vector<vector<int>>m;
     vector<vector<int>>s;
 };
+//求解矩阵链最优分割方案和最少代价
 MatrixAndPrint MatrixChainOrder(vector<int>p);
+//打印最佳括号分割方案
 int PrintOptimalParens(vector<vector<int>>s, int i, int j);
 
 int main()
@@ -24,6 +28,7 @@ int main()
     return 0;
 }
 
+//求解矩阵链最优分割方案和最少代价
 MatrixAndPrint MatrixChainOrder(vector<int>p)
 {
     int n=p.size()-1;
@@ -49,6 +54,7 @@ MatrixAndPrint MatrixChainOrder(vector<int>p)
     return ms;
 }
 
+//打印最优括号分割方案
 int PrintOptimalParens(vector<vector<int>>s, int i, int j)
 {
     if(i==j){
