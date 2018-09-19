@@ -35,18 +35,3 @@ vector<int> recursiveActivitySelector(
     return v;
 }
 
-//#include <iostream>
-//#include <vector>
-//
-//using namespace std;
-//
-//int main()
-//{
-//    vector<int>a;
-//    int t=1;
-//    a.push_back(t);
-//    a.insert(a.begin(), 3);//在开头插入元素3
-//    a.insert(a.end(), 4, 1);//在末尾插入4个1
-//    cout<<a[0]<<endl;
-//    return 0;
-//}
