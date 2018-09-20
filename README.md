@@ -18,6 +18,7 @@ Including most of algotithms in Introduction-to-algotithms
 15.2.2.矩阵链乘法                              2-2.MatrixChainMultiplication
 
 第十六章-贪心算法                               Chapter 16-Greedy Algorithm
+
 16.1.1.最佳活动选择                            1-1.RecursiveActivitySelector.cpp
 
 16.1.2.贪心活动选择                            1-2.GreedyAcitvitySelector.cpp
