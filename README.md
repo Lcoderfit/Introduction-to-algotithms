@@ -17,3 +17,15 @@ Including most of algotithms in Introduction-to-algotithms
 
 15.2.2.矩阵链乘法                              2-2.MatrixChainMultiplication
 
+第十六章-贪心算法                               Chapter 16-Greedy Algorithm
+16.1.1.最佳活动选择                            1-1.RecursiveActivitySelector.cpp
+
+16.1.2.贪心活动选择                            1-2.GreedyAcitvitySelector.cpp
+
+第二十二章-图算法                               chapter 22-Graph Algorithm
+
+22.1.1.广度优先算法                            1-1.Bfs.cpp
+
+22.1.2.深度优先算法                            1-2.Dfs.cpp
+
+22.1.3.广度和深度优先算法整合                    1-3.BfsAndDfs.cpp
