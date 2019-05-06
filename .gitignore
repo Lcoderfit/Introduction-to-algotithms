@@ -3,6 +3,9 @@
 #保留/~/~/目录下的所有.cpp
 !/*/*/*.cpp
 
+#保留Answer for leetcode文件夹
+!/Answer-for-leetcode/*
+
 #过滤/～/目录下的所有文件
 /*/*
 #只保留/～/目录下的所有.cpp文件
@@ -19,6 +22,3 @@
 
 #只保留README.md文件
 !README.md
-
-#保留Answer for leetcode文件夹
-!Answer-for-leetcode
