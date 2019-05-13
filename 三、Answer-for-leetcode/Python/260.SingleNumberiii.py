@@ -2,7 +2,7 @@ from typing import List
 
 
 class Solution(object):
-    def single_number(self, nums):
+    def single_number(self, nums: List[int]) -> tuple:
         diff = 0
         for num in nums:
             diff ^= num
