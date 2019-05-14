@@ -9,7 +9,7 @@
 #         return m<<count
 
 
-class Solution:
+class Solution1:
     def range_bitwise_and(self, m: int, n: int) -> int:
         count = 0
         while m != n:
@@ -17,6 +17,14 @@ class Solution:
             n >>= 1
             count += 1
         return m<<count
+
+
+class Solution2:
+    '''???'''
+    def range_bitwise_and(self, m: int, n: int) -> int:
+        while n > m:
+            n &= (n-1)
+        return n
 
 
 if __name__ == '__main__':
