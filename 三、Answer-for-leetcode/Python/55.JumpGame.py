@@ -12,7 +12,7 @@ class Solution1:
 
 
 class Solution2:
-    def can_jump(self, nums: List[int]) -> int:
+    def can_jump(self, nums: List[int]) -> bool:
         n = len(nums)
         l = n - 1
         for i in range(n-1, -1, -1):
