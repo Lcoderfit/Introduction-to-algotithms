@@ -1,57 +1,88 @@
-'''一、单例模式
-实现方法：4种
-1、用装饰器实现
-2、用__new__实现
-'''
-def singleton1(cls):
-    instances = {}
-    def wrapper(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-    return wrapper
+"""
+实现单例模式的五种方式
+"""
 
-@singleton1
-class Foo1(object):
-    pass
+# 方法一，装饰器
+def Singleton1(cls):
+    _instance = {}
+
+    def _singleton(*args, **kwargs):
+        if cls not in _instance:
+            _instance[cls] = cls(*args, **kwargs)
+        return _instance[cls]
+
+    return _singleton
+
+@Singleton1
+class A(object):
+    a = 1
+
+    def __init__(self, x=0):
+        self.x = x
 
 
-class Singleton2(object):
-    '''new方法返回当前类的实例'''
+a1 = A(2)
+a2 = A(3)   #实例已经存在，不会再实例化一个对象
+print(a1.x, a2.x)
+
+
+# 方法二，使用类
+class Singleton2:
+    def __init__(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def instance(cls, *args, **kwargs):
+        if not hasattr(Singleton2, "_instance"):
+            Singleton2._instance = Singleton2(*args, **kwargs)
+        return Singleton2._instance
+
+
+# 方法三 使用__new__
+import threading
+
+
+class Singleton3:
+    _instance_lock = threading.Lock()
+    k = 1
+
+    def __init__(self):
+        pass
+
     def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, '_instance'):
-            cls._instance = super(Singleton2, cls).__new__(cls, *args, **kwargs)
-        return cls._instance
+        if not hasattr(Singleton3, "_instance"):
+            with Singleton3._instance_lock:
+                Singleton3._instance = super().__new__(cls)
+        return Singleton3._instance
 
 
-class Foo2(Singleton2):
-    pass
+print("******方法三******")
+obj = Singleton3()
+print(obj.k)
+obj2 = Singleton3()
+obj2.k = 4
+print(id(obj), id(obj2))
 
 
-class Singleton3(type):
-    '''用元类创建'''
+# 方法四 使用metaclass
+import threading
+
+
+class SingletonType(type):
+    _instance_lock = threading.Lock()
     def __call__(cls, *args, **kwargs):
-        if not hasattr(cls, '_instance'):
-            cls._instance = super(Singleton3, cls).__call__(*args, **kwargs)
+        if not hasattr(cls, "_instance"):
+            with SingletonType._instance_lock:
+                cls._instance = super(SingletonType, cls).__call__(*args, **kwargs)
         return cls._instance
 
 
-class Foo3(metaclass=Singleton3):
-    pass
+class Foo(metaclass=SingletonType):
+    def __init__(self, name):
+        self.name = name
 
 
-if __name__ == '__main__':
-    #用装饰器
-    foo1 = Foo1()
-    foo2 = Foo1()
-    print(id(foo1), id(foo2))
-
-    #用__new__()
-    foo3 = Foo2()
-    foo4 = Foo2()
-    print(id(foo3), id(foo4))
-
-    #用元类
-    foo5 = Foo3()
-    foo6 = Foo3()
-    print(id(foo5), id(foo6))
+obj1 = Foo("name1")
+obj2 = Foo("name2")
+print("******方法四******")
+print(id(obj1), id(obj2))
