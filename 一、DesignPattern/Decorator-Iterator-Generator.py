@@ -242,4 +242,3 @@ if __name__ == "__main__":
     print(id(func3), id(Wrapper))
 
 
-
