@@ -12,10 +12,10 @@ class Solution:
     def depth(self, root):
         if not root:
             return 0
-        left = depth(root.left)
+        left = self.depth(root.left)
         if left == -1:
             return -1
-        right = depth(root.right)
+        right = self.depth(root.right)
         if right == -1:
             return -1
 
