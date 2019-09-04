@@ -25,7 +25,3 @@ class BinaryTravelsal:
                 temp.extend([node.left, node.right])
             level = [leaf for leaf in temp if leaf]
         return ret
-
-
-
-
