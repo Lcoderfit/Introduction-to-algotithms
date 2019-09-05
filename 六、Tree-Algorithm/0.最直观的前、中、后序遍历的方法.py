@@ -60,7 +60,24 @@ class Solution2:
 
 
 class Solution3:
-    def 
+    """
+    颜色标记法——后序遍历
+    """
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        WHITE, GRAY = 0, 1
+        stack = [(WHITE, root)]
+        ret = []
+        while stack:
+            color, node = stack.pop()
+            if not node: continue
+            if color == WHITE:
+                stack.append((GRAY, node))
+                stack.append((WHITE, node.right))
+                stack.append((WHITE, node.left))
+            else:
+                ret.append(node.val)
+
+        return ret
 
 
 
