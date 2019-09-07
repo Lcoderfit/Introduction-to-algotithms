@@ -28,8 +28,36 @@
 
 #
 # import functools
-#
-#
+
+
+import functools
+
+
+def outter(param):
+    def wrapper(f):
+        @functools.wraps(f)
+        def handler(*args, **kwargs):
+            param(args[0])
+            print("Hello")
+            return f(*args, **kwargs)
+        return handler
+    return wrapper
+
+
+def p(name):
+    print(name)
+
+
+@outter(p)
+def k(name):
+    print("world")
+
+
+if __name__ == "__main__":
+    k("luhu")
+
+
+
 # def user_login_data(params):
 #     def wrapper(real_func):
 #         @functools.wraps(real_func)
@@ -211,16 +239,53 @@ def k():
 import functools
 
 
+import functools
+
+def pa(name):
+    print(name)
+
+
 class Wrapper:
     def __init__(self, param):
         self.param = param
+
     def __call__(self, f):
         @functools.wraps(f)
-        def inner(*args, **kwargs):
-            self.param()
-            print("HELLO WORLD")
+        def handler(*args, **kwargs):
+            self.param(args[0])
+            print("HELLO")
             return f(*args, **kwargs)
-        return inner
+        return handler
+
+@Wrapper(pa)    #f = @Wrapper(pa)(f) ==>    f = __call__(f) ==> f = handler
+def f(name):
+    print(name)
+
+
+f("luhu")
+
+
+
+
+
+
+
+
+
+
+# import functools
+#
+#
+# class Wrapper:
+#     def __init__(self, param):
+#         self.param = param
+#     def __call__(self, f):
+#         @functools.wraps(f)
+#         def inner(*args, **kwargs):
+#             self.param()
+#             print("HELLO WORLD")
+#             return f(*args, **kwargs)
+#         return inner
 
 
 @Wrapper(k)     # func2 = Wrapper(k)(func2)     func2 --> __call__(func2)   func2 --> inner
