@@ -1,7 +1,6 @@
 """
 实现单例模式的五种方式
 """
-
 # 方法一，装饰器
 def Singleton1(cls):
     _instance = {}
@@ -86,3 +85,27 @@ obj1 = Foo("name1")
 obj2 = Foo("name2")
 print("******方法四******")
 print(id(obj1), id(obj2))
+
+
+def File(object):
+    def __init__(self, file_name, file_model):
+        self.file_name = file_name
+        self.file_mode = file_model
+
+    def __enter__(self):
+        self.f = open(self.file_name, self.model)
+        return self.f
+
+    def __exit__(self):
+        self.f.close()
+
+
+
+from contextlib import contextmanager
+
+
+@contextmanager
+def file(file_name, file_model):
+    f = open(file_name, file_model)
+    yield f
+    f.close()
