@@ -1,5 +1,14 @@
 """
 实现单例模式的五种方式
+
+1、单例模式
+单例模式：保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+
+一个类的唯一实例
+
+适用性：
+当类只能有一个实例而且客户可以从一个众所周知的访问点访问它时。
+当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能使用一个扩展的实例时。
 """
 # 方法一，装饰器
 def Singleton1(cls):
@@ -30,6 +39,7 @@ class Singleton2:
     def __init__(self, *args, **kwargs):
         pass
 
+    # 类方法必须以一个cls作为参数
     @classmethod
     def instance(cls, *args, **kwargs):
         if not hasattr(Singleton2, "_instance"):
@@ -86,26 +96,3 @@ obj2 = Foo("name2")
 print("******方法四******")
 print(id(obj1), id(obj2))
 
-
-def File(object):
-    def __init__(self, file_name, file_model):
-        self.file_name = file_name
-        self.file_mode = file_model
-
-    def __enter__(self):
-        self.f = open(self.file_name, self.model)
-        return self.f
-
-    def __exit__(self):
-        self.f.close()
-
-
-
-from contextlib import contextmanager
-
-
-@contextmanager
-def file(file_name, file_model):
-    f = open(file_name, file_model)
-    yield f
-    f.close()

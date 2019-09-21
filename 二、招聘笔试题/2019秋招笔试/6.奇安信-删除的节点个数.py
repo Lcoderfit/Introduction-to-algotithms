@@ -1,25 +1,3 @@
-# 建立二叉树是以层序遍历方式输入，节点不存在时以 'None' 表示
-# def creatTree(nodeList):
-#     if nodeList[0] == None:
-#         return None
-#     head = BSTreeNode(nodeList[0])
-#     Nodes = [head]
-#     j = 1
-#     for node in Nodes:
-#         if node != None:
-#             node.leftChild = (BSTreeNode(nodeList[j]) if nodeList[j] != None else None)
-#             Nodes.append(node.leftChild)
-#             j += 1
-#             if j == len(nodeList):
-#                 return head
-#             node.rightChild = (BSTreeNode(nodeList[j])if nodeList[j] != None else None)
-#             j += 1
-#             Nodes.append(node.rightChild)
-#             if j == len(nodeList):
-#                 return head
-
-#
-
 class BSTreeNode(object):
     def __init__(self, data):
         self.val = data
