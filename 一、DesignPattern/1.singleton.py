@@ -96,3 +96,5 @@ obj2 = Foo("name2")
 print("******方法四******")
 print(id(obj1), id(obj2))
 
+
+
