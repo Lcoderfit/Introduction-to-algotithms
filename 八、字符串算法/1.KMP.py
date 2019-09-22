@@ -28,6 +28,7 @@ class Solution:
             elif j != 0:
                 j = pnext[j - 1]
             else:
+                # 此时j == 0, 母串继续从i的后一个位置比较
                 i += 1
         if j == m:
             # 0 1 2 3 4 5 6 7
@@ -65,6 +66,12 @@ class Solution:
 if __name__ == "__main__":
     string = 'abcxabcdabcdabcy'
     substring = 'abcdabcy'
-    s = Solution()
+    s = Solution1()
     ret = s.kmp_algorithm(string, substring)
     print(ret)
+
+
+
+
+
+
