@@ -23,3 +23,6 @@ if __name__ == "__main__":
     s = Solution()
     ret = s.max_sub_array(nums)
     print(ret)
+
+
+

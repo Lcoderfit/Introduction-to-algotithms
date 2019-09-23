@@ -66,7 +66,7 @@ class Solution:
 if __name__ == "__main__":
     string = 'abcxabcdabcdabcy'
     substring = 'abcdabcy'
-    s = Solution1()
+    s = Solution()
     ret = s.kmp_algorithm(string, substring)
     print(ret)
 

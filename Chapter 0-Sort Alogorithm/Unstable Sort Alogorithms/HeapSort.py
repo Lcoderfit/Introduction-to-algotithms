@@ -1,4 +1,5 @@
 """
+https://blog.csdn.net/chandelierds/article/details/91357784
 堆排序：不稳定排序，如果两个相同元素，a在左边，b在右边(则a在b前面)，右边的先到堆顶，
 然后排序之后被交换到堆底，a之后也交换到堆底，则b在a的前面
 算法时间复杂度
@@ -8,10 +9,6 @@
 3、最差：O(nlogn)
 空间复杂度：O(1)
 """
-from typing import List
-import random
-
-
 class Solution:
     def heapify(self, arr, start, end):
         """
