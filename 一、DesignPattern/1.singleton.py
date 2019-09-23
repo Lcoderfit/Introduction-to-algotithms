@@ -9,6 +9,10 @@
 适用性：
 当类只能有一个实例而且客户可以从一个众所周知的访问点访问它时。
 当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能使用一个扩展的实例时。
+
+
+
+在方法二中，可以使用__new__来写一个单例模式，或者__call__编写一个装饰器，用装饰器写一个单例
 """
 # 方法一，装饰器
 def Singleton1(cls):
@@ -34,67 +38,89 @@ a2 = A(3)   #实例已经存在，不会再实例化一个对象
 print(a1.x, a2.x)
 
 
-# 方法二，使用类
-class Singleton2:
+# 方法二，使用类（类方法）
+import time
+import threading
+
+
+class Singleton:
+    _instance_lock = threading.Lock()
+
     def __init__(self, *args, **kwargs):
-        pass
+        time.sleep(1)
 
     # 类方法必须以一个cls作为参数
     @classmethod
     def instance(cls, *args, **kwargs):
-        if not hasattr(Singleton2, "_instance"):
-            Singleton2._instance = Singleton2(*args, **kwargs)
-        return Singleton2._instance
-
-
-# 方法三 使用__new__
-import threading
-
-
-class Singleton3:
-    _instance_lock = threading.Lock()
-    k = 1
-
-    def __init__(self):
-        pass
-
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(Singleton3, "_instance"):
-            with Singleton3._instance_lock:
-                Singleton3._instance = super().__new__(cls)
-        return Singleton3._instance
-
-
-print("******方法三******")
-obj = Singleton3()
-print(obj.k)
-obj2 = Singleton3()
-obj2.k = 4
-print(id(obj), id(obj2))
-
-
-# 方法四 使用metaclass
-import threading
-
-
-class SingletonType(type):
-    _instance_lock = threading.Lock()
-    def __call__(cls, *args, **kwargs):
+        # 第一个判断是为了减少后面多次创建单例时重复加锁
         if not hasattr(cls, "_instance"):
-            with SingletonType._instance_lock:
-                cls._instance = super(SingletonType, cls).__call__(*args, **kwargs)
+            # 在第二个判断前加锁，是为了支持多线程
+            with cls._instance_lock:
+                if not hasattr(cls, "_instance"):
+                    cls._instance = cls(*args, **kwargs)
         return cls._instance
 
 
-class Foo(metaclass=SingletonType):
+def task(arg):
+    obj = Singleton.instance()
+    print(obj)
+
+for i in range(10):
+    t = threading.Thread(target=task, args=[i,])
+    t.start()
+
+
+# 方法三 使用__new__
+import time
+import threading
+
+
+class Singleton(object):
+    _instance_lock = threading.Lock()
+
+    def __init__(self, *args, **kwargs):
+        time.sleep(1)
+        pass
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, "_instance"):
+            with cls._instance_lock:
+                if not hasattr(cls, "_instance"):
+                    cls._instance = object.__new__(cls)
+        return cls._instance
+
+
+def task(arg):
+    obj = Singleton()
+    print(obj)
+
+for i in range(10):
+    t = threading.Thread(target=task, args=[i, ])
+    t.start()
+
+
+# 方法四 使用metaclass(__call__方法, 继承type)
+import time
+import threading
+
+
+class SingleType(type):
+    _instance_lock = threading.Lock()
+
+    # 实例化一个对象时，先调用类的__call__方法，然后在其中调用__new__方法和__init__来创建和初始化实例
+    def __call__(cls, *args, **kwargs):
+        if not hasattr(cls, "_instance"):
+            with cls._instance_lock:
+                if not hasattr(cls, "_instance"):
+                    cls._instance = super(SingleType, cls).__call__(*args, **kwargs)
+        return cls._instance
+
+
+class Foo(metaclass=SingleType):
     def __init__(self, name):
         self.name = name
 
 
 obj1 = Foo("name1")
 obj2 = Foo("name2")
-print("******方法四******")
-print(id(obj1), id(obj2))
-
-
-
+print(obj1, obj2)
