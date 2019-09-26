@@ -23,7 +23,7 @@ def createListNode(list_node):
 
 class Solution:
     # 返回ListNode
-    def ReverseList(self, pHead):
+    def ReverseList1(self, pHead):
         # write code here
         if (not pHead) or (not pHead.next):
             return pHead
@@ -41,6 +41,19 @@ class Solution:
             r = r.next
         q.next = p
         return q
+
+    def ReverseList2(self, pHead):
+        if not pHead:
+            return pHead
+        p, q, r = None, None, pHead
+        while r.next !=None:
+            p = q
+            q = r
+            r = r.next
+            q.next = p
+        r.next = q
+
+        return r
 
     def printList(self, pHead):
         ret = list()
