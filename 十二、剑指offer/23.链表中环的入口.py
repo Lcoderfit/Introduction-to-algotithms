@@ -28,7 +28,7 @@ def createListNode(l1, l2):
 
 
 class Solution:
-    def EntryNodeOfLoop(self, pHead):
+    def EntryNodeOfLoop1(self, pHead):
         if (not pHead) or (not pHead.next):
             return None
 
@@ -43,6 +43,24 @@ class Solution:
             p = p.next
         return p
 
+    def EntryNodeOfLoop2(self, pHead):
+        pFast = pSlow = pHead
+        while pFast and pFast.next:
+            pFast = pFast.next.next
+            pSlow = pSlow.next
+
+            if pFast == pSlow:
+                break
+
+        if (not pFast) or (not pFast.next):
+            return None
+
+        pFast = pHead
+        while pFast != pSlow:
+            pFast = pFast.next
+            pSlow = pSlow.next
+        return pFast
+
     def printListNode(self, pHead):
         p = pHead
         ret = list()
@@ -56,5 +74,5 @@ if __name__ == "__main__":
     l2 = [3, 4, 5]
     pHead = createListNode(l1, l2)
     s = Solution()
-    ret = s.EntryNodeOfLoop(pHead)
+    ret = s.EntryNodeOfLoop2(pHead)
     print(ret.val)
