@@ -54,7 +54,8 @@ class Solution2:
         ret = arr[:k]
         self.heapify(ret, 0, k - 1)
         for i in range(k, len(arr)):
-            if arr[i] >= ret[0]:
+            # 当arr[i]大于ret[0]时才交换，等于时没必要交换，因为交换了堆顶元素大小也没变
+            if arr[i] > ret[0]:
                 ret[0] = arr[i]
                 self.heapify(ret, 0, k - 1)
         return ret[0]
