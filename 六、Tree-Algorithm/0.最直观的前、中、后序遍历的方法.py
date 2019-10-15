@@ -19,7 +19,7 @@ from typing import List
 
 class Solution1:
     """
-    颜色标记法-中旭遍历
+    颜色标记法-中序遍历
     """
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         WHITE, GRAY = 0, 1

@@ -32,11 +32,11 @@ class Solution1:
         ret, stack = [], [root]
         while stack:
             node = stack.pop()
-            output.append(node.val)
+            ret.append(node.val)
             if node.left:
                 stack.append(node.left)
             if node.right:
                 stack.append(node.right)
 
         # 列表逆置后的元素顺序就相当于栈元素的出栈顺序
-        return output[::-1]
+        return ret[::-1]

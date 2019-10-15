@@ -46,6 +46,3 @@ class Solution1:
                 stack.append(cur.left)
 
         return ret
-
-
-
