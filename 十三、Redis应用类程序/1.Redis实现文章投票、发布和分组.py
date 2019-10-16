@@ -10,6 +10,7 @@ class ArticleVote:
     def __init__(self):
         self.ONE_WEEK_IN_SECONDS = 7 * 86400
         self.VOTE_SCORE = 432
+        self.ARTICLE_PER_PAGE = 25
 
     def article_vote(self, client, user, article):
         """文章投票"""
@@ -44,4 +45,20 @@ class ArticleVote:
         client.zadd('time:', article, post_time)
 
         return article_id
+
+    def get_article(self, client, page, order='score:'):
+        """获取经过分数排名的对应页数的文章详细信息"""
+        start = (page - 1) * self.ARTICLE_PER_PAGE
+        end = start + self.ARTICLE_PER_PAGE - 1
+
+        ids = client.zrevrange(order, start, end)
+        articles = list()
+        for id in ids:
+            article_data = client.hgetall(id)
+            article_data['id'] = id
+            articles.append(article_data)
+        return articles
+
+
+
 
