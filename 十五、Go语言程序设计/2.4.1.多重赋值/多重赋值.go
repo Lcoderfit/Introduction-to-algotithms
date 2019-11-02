@@ -17,7 +17,7 @@ func main() {
 	for input.Scan() {
 		array := strings.Split(input.Text(), " ")
 		p, q := array[0], array[1]
-		a := make(strconv.Atoi(p))[0:1]
+		a, _ := strconv.Atoi(p)
 		b, _ := strconv.Atoi(q)
 
 		res1 := gcd1(a, b)
@@ -46,4 +46,10 @@ func gcd2(x, y int) int {
 }
 
 //斐波那契堆
-// func fib()
+func fib(n int) int {
+	x, y := 0, 1
+	for i := 0; i < n; i++ {
+		x, y = y, x+y
+	}
+	return x
+}
