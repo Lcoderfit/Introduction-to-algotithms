@@ -30,10 +30,6 @@ func main() {
 	fmt.Println('k')
 
 	fmt.Println(intsToString([]int{1, 2, 3}))
-
-	y := "lcoder"
-	fmt.Fprintf(&y, "%s", "fit")
-	fmt.Println(y)
 }
 
 func basename(s string) string {
