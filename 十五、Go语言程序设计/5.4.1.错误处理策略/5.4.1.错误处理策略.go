@@ -23,8 +23,11 @@ func main() {
 			fmt.Println("Success:", doc)
 		}
 	}
-	error := WaitForServer(url)
-	fmt.Println(error)
+	if err := WaitForServer(url); err != nil {
+		// log.SetPrefix("wait:")
+		// log.SetFlags(0)
+		log.Fatalf("Site is down: %v\n", err)
+	}
 }
 
 func WaitForServer(url string) error {
@@ -39,4 +42,21 @@ func WaitForServer(url string) error {
 		time.Sleep(time.Second << uint(tries)) // 指数退避策略
 	}
 	return fmt.Errorf("server %s failed to respond after %s", url, timeout)
+}
+
+func a() {
+	if err := Ping(); err != nil {
+		log.Printf("ping failed: %v; networking disabled", err)
+	}
+}
+
+func b() {
+	if err := Ping(); err != nil {
+		fmt.Fprintf(os.Stderr, "ping failed: %v; networking disabled\n", err)
+	}
+	dir, err := ioutil.TempDir("", "scratch")
+	if err != nil {
+		return fmt.Errorf("failed to create temp dir: %v", err)
+	}
+	os.RemoveAll(dir)
 }
