@@ -35,6 +35,7 @@ func main() {
 		{1, 1},
 	}
 	fmt.Println(perim.Distance())
+	fmt.Println("Lcoderfit")
 }
 
 func Distance(p, q Point) float64 {
