@@ -51,4 +51,4 @@ class Solution:
         y.size = x.size
         x.size = x.left.size + x.right.size + 1
 
-    def 
+    def
