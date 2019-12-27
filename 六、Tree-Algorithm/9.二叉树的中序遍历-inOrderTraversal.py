@@ -1,4 +1,4 @@
-from typing import List
+﻿from typing import List
 
 
 class TreeNode:
@@ -23,7 +23,7 @@ class Solution:
 
 class Solution1:
     """
-    递归法
+   非 递归法
     时间复杂度：O(n)，每个节点恰好访问一次
     空间复杂度：O(n)，最坏情况下是每个节点都存储一次
     """
