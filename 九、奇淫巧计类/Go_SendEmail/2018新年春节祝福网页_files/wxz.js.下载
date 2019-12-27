@@ -1,0 +1,6 @@
+
+document.write(
+'<div style="height:1px;"></div>'
++'<p style="font-family:宋体;font-size:22px;line-height:1.8em;"><a href="http://link.569.com/wxlink44.html" style="text-decoration:none;color:#ffff00;" target="_blank">精美礼物请点击这里</a></p>'
+
+);
