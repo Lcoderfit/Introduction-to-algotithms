@@ -6,6 +6,7 @@ import (
 	"log"
 )
 
+// 可以把返回值改为code string，然后if err != nil, return ""
 func SendSms(regionId, appKey, appSecret, signName, templateCode, phoneNumber string) error {
 	client, err := dysmsapi.NewClientWithAccessKey(regionId, appKey, appSecret)
 	if err != nil {
@@ -33,5 +34,12 @@ func SendSms(regionId, appKey, appSecret, signName, templateCode, phoneNumber st
 		return err
 	}
 	log.Println(response)
+
+	// 如果返回值改成 (code string), 添加如下代码
+	// response.Code表示请求的状态，请求成功返回"OK"
+	//if response.Code != "OK" {
+	//	return ""
+	//}
+
 	return nil
 }
