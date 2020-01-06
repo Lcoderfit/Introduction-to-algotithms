@@ -16,8 +16,10 @@ func main() {
 	//smsSend()
 
 	// 3.获取文件路径
-	genPath()
+	//genPath()
 
+	// 4.unix时间戳转UTC
+	utils.TimeFormatExchange()
 }
 func genPath() {
 	path := utils.GetPath(0)
