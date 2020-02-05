@@ -6,7 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/aliyun/alibaba-cloud-sdk-go v1.60.304
 	github.com/andybalholm/cascadia v1.1.0 // indirect
-	github.com/astaxie/beego v1.12.0 // indirect
+	github.com/astaxie/beego v1.12.0
 	github.com/gin-gonic/gin v1.5.0 // indirect
 	github.com/mojocn/base64Captcha v1.2.2
 	github.com/russross/blackfriday v2.0.0+incompatible

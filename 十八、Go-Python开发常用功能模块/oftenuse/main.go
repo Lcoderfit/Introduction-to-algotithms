@@ -31,9 +31,32 @@ func main() {
 	//genMD5()
 
 	// 7.将markdown内容转换为HTML
-	switchMarkdownToHTML()
+	//switchMarkdownToHTML()
 
 	// 8.Web文件上传
+
+	// 9.验证手机号
+	checkPhone()
+}
+
+// 9.验证手机号
+func checkPhone() {
+	fmt.Println("CheckPhone Begin")
+	var phone string
+	var n int
+
+	for {
+		// 输入的正确方法，后面需要加一个\n, 如果不加\n会读取两次，
+		// 第一次读取phone, 第二次读取输入时按下回车键后末尾的\n,
+		// 所以同一个输出语句会打印两次
+		n, _ = fmt.Scanf("%s\n", &phone)
+		fmt.Println("n: ", n)
+		res := utils.CheckPhone(phone)
+		fmt.Printf("phone=%s, is %t\n", phone, res)
+	}
+	//phone := "1287049"
+	//res := utils.CheckPhone(phone)
+	//fmt.Println("res: ", res)
 }
 
 // 8.Web文件上传
