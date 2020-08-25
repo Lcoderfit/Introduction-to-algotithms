@@ -52,3 +52,68 @@ func SwitchTimeStampToData(unixTime int64) string {
 	timeStr := time.Unix(unixTime, 0).Format("2006-01-02 15:04:05")
 	return timeStr
 }
+
+//time.Now()
+func TimeFunction() {
+	now := time.Now() //获取当前时间
+	fmt.Println("Now: ", now)
+	//==>2019-08-21 11:30:51.2470317 +0800 CST m=+0.004501101
+	fmt.Printf("时间戳（秒）：%v;\n", time.Now().Unix())        //10位
+	fmt.Printf("时间戳（纳秒）：%v;\n",time.Now().UnixNano())    //19位
+	fmt.Printf("时间戳（毫秒）：%v;\n",time.Now().UnixNano() / 1e6)        //或者秒*1000也可
+	fmt.Printf("时间戳（纳秒-->秒）：%v;\n",time.Now().UnixNano() / 1e9)
+}
+
+//获取指定时间前的时间
+func GetTimeBefore() {
+	// 获取50秒前的时间，方式1
+	st,_ := time.ParseDuration("-50s")
+	fmt.Println("50秒前的时间：",time.Now().Add(st))
+
+	// 获取1分钟前的时间，n秒前则是time.Second * -n，方式2
+	t := time.Now().Add(time.Minute * -1)
+	fmt.Println("一分钟前的时间：",t)
+
+	//获取1小时前的时间
+	sth,_ := time.ParseDuration("-1h")
+	fmt.Println("1小时前的时间：",time.Now().Add(sth))
+
+	// 获取2天前的时间
+	oldTime := time.Now().AddDate(0, 0, -2)
+	fmt.Println("两天前的时间为：", oldTime)
+
+	//获取两个月前的时间
+	oldTime = time.Now().AddDate(0, -2, 0)
+	fmt.Println("两个月前的时间为：", oldTime)
+}
+
+//获取指定时间后的时间
+func GetTimeAfter() {
+	// 获取50秒后的时间，方式1
+	st,_ := time.ParseDuration("50s")
+	fmt.Println("50秒之后的时间：",time.Now().Add(st))
+
+	// 获取1分钟后的时间，n秒前则是time.Second * n，方式2
+	t := time.Now().Add(time.Minute * 1)
+	fmt.Println("一分钟后的时间：",t)
+
+	//获取1小时后的时间
+	sth,_ := time.ParseDuration("1h")
+	fmt.Println("1小时之后的时间：",time.Now().Add(sth))
+
+	// 获取当前时间2天后的时间
+	newTime := time.Now().AddDate(0, 0, 2)
+	//newTime 的结果为时间time类型
+	fmt.Println("当前时间2天后的时间", newTime)
+
+	//获取当前时间2月后的时间
+	newTime = time.Now().AddDate(0, 2, 0)
+	fmt.Println("当前时间2月后的时间", newTime)
+}
+
+func GetTimeDelta() {
+	t1 := time.Now()
+	//设置期间经历了50秒时间
+	t2 := time.Now().Add(time.Second * 50)
+	fmt.Println("t2与t1相差：",t2.Sub(t1))		//t2与t1相差： 50s
+}

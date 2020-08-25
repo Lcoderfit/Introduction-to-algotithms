@@ -40,16 +40,19 @@ class Solution1:
 
 
 if __name__ == "__main__":
-    readline = sys.stdin
-    for line in readline:
-        line = [int(i) for i in line.split(" ")]
-        x, y = int(line[0]), int(line[1])
-        s = Solution()
-        res1 = s.gcd1(x, y)
-        res2 = s.gcd2(x, y)
-        print(res1, res2)
-
-        s1 = Solution1()
-        res3 = s1.gcd1(x, y)
-        res4 = s1.gcd2(x, y)
-        print(res3, res4)
+    # readline = sys.stdin
+    # for line in readline:
+    #     line = [int(i) for i in line.split(" ")]
+    #     x, y = int(line[0]), int(line[1])
+    #     s = Solution()
+    #     res1 = s.gcd1(x, y)
+    #     res2 = s.gcd2(x, y)
+    #     print(res1, res2)
+    #
+    #     s1 = Solution1()
+    #     res3 = s1.gcd1(x, y)
+    #     res4 = s1.gcd2(x, y)
+    #     print(res3, res4)
+    record = ('Dave', 'dave#example.com', '777-555-430', '432-532-52')
+    name, email, *phone = record
+    print(phone)

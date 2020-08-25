@@ -7,6 +7,7 @@ require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.60.304
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/astaxie/beego v1.12.0
+	github.com/futurez/litego v0.0.0-20170306021252-98a875db27cb
 	github.com/gin-gonic/gin v1.5.0 // indirect
 	github.com/mojocn/base64Captcha v1.2.2
 	github.com/russross/blackfriday v2.0.0+incompatible
