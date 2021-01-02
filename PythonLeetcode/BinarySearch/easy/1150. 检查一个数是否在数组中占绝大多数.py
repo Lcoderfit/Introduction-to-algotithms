@@ -70,7 +70,7 @@ class Solution:
         left = i
 
         # 如果是求右边界，则mid偏向右，nums[mid]与nums元素值相等的情况时i指向mid，不偏移，因为mid会偏向右
-        # 右边界，mid偏右，左指指向mid
+        # 右边界，mid偏右(mid = (i+j+1)//2)，左指指向mid
         # 如果循环条件为i <= j,则可以改成i向mid右偏，j向mid左偏
         i, j = 0, len(nums) - 1
         while i < j:
