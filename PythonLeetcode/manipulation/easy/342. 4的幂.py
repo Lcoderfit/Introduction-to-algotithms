@@ -20,7 +20,7 @@ r2:
 False
 
 
-(a + b) % p = (a % p + b % p) % p （1）
+(a + b) % p = (a % p + b % p) % p = (a % p + b) % p = (a + b % p) % p （1）
 (a - b) % p = (a % p - b % p ) % p （2）
 (a * b) % p = (a % p * b % p) % p （3）
 a ^ b % p = ((a % p)^b) % p （4）
