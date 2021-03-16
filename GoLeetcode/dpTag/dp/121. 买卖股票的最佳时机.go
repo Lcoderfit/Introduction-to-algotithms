@@ -31,7 +31,7 @@ func maxProfit(prices []int) int {
 	for i := 0; i < len(prices); i++ {
 		if prices[i] > maxPrice {
 			maxPrice = prices[i]
-			if ret < maxPrice - minPrice {
+			if ret < maxPrice-minPrice {
 				ret = maxPrice - minPrice
 			}
 		}
@@ -47,7 +47,7 @@ func MaxProfit2(prices []int) int {
 	minPrice := int(math.MaxInt32)
 	maxPrice := 0
 	for _, price := range prices {
-		maxPrice = max(maxPrice, price - minPrice)
+		maxPrice = max(maxPrice, price-minPrice)
 		minPrice = min(minPrice, price)
 	}
 	return maxPrice
