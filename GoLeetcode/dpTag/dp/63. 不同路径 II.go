@@ -1,6 +1,5 @@
 package dp
 
-
 //dp
 func UniquePathsWithObstacles(obstacleGrid [][]int) int {
 	rows, cols := len(obstacleGrid), len(obstacleGrid[0])
@@ -11,7 +10,7 @@ func UniquePathsWithObstacles(obstacleGrid [][]int) int {
 	for j := 0; j < cols; j++ {
 		if obstacleGrid[0][j] == 0 {
 			dp[0][j] = 1
-		}else {
+		} else {
 			break
 		}
 	}

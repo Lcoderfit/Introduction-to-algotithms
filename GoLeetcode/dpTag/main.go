@@ -1,13 +1,17 @@
 package main
 
 import (
-	"GoLeetcode/dpTab/dp"
+	"GoLeetcode/dpTag/dp"
+	"GoLeetcode/dpTag/medium"
 	"fmt"
 )
 
 func main() {
 	//121. 买卖股票的最佳时机.go
 	//maxProfit()
+
+	//221. 最大正方形.go
+	MaximalSquare()
 
 	//300. 最长上升子序列.go
 	//lengthOfLIS()
@@ -26,6 +30,33 @@ func maxProfit() {
 		}
 		ret := dp.MaxProfit(prices)
 		fmt.Println("maxProfit: ", ret)
+	}
+}
+
+//221. 最大正方形.go
+func MaximalSquare() {
+	var m, n int
+	for {
+		_, err := fmt.Scanln(&m, &n)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		matrix := make([][]byte, 0)
+		for i := 0; i < m; i++ {
+			row := make([]byte, n)
+			for j := 0; j < n; j++ {
+				_, err := fmt.Scanf("%d", &row[j])
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+			}
+			matrix = append(matrix, row)
+		}
+		//ans := medium.MaximalSquare1(matrix)
+		ans := medium.MaximalSquare2(matrix)
+		fmt.Println(ans)
 	}
 }
 
