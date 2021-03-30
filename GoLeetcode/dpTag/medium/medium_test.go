@@ -32,7 +32,13 @@ func TestMaximalSquare(t *testing.T) {
 			}
 			matrix[i] = row
 		}
-		ans := MaximalSquare(matrix)
+		ans := MaximalSquare1(matrix)
 		fmt.Println(ans)
 	}
+}
+
+func TestNthUglyNumber2(t *testing.T) {
+	n := 10
+	ans := NthUglyNumber2(n)
+	fmt.Println(ans)
 }

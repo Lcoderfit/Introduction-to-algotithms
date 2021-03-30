@@ -47,7 +47,7 @@ func MaximalSquare1(matrix [][]byte) int {
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {
 			if matrix[i][j] == '1' {
-				dp[i][j] = MinArray(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+				dp[i][j] = Min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
 				if dp[i][j] > ans {
 					ans = dp[i][j]
 				}
@@ -84,28 +84,4 @@ func MaximalSquare2(matrix [][]byte) int {
 		}
 	}
 	return ans * ans
-}
-
-func MinArray(array ...int) int {
-	ans := array[0]
-	for i := 1; i < len(array); i++ {
-		if ans > array[i] {
-			ans = array[i]
-		}
-	}
-	return ans
-}
-
-func Min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func Max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
