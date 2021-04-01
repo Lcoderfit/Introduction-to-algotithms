@@ -42,3 +42,61 @@ func TestNthUglyNumber2(t *testing.T) {
 	ans := NthUglyNumber2(n)
 	fmt.Println(ans)
 }
+
+func TestMinimumTotal(t *testing.T) {
+	triangle1 := [][]int{
+		{2},
+		{3, 4},
+		{6, 5, 7},
+		{4, 1, 8, 3},
+	}
+	ans1 := 11
+	res1 := MinimumTotal(triangle1)
+	if res1 != ans1 {
+		t.Errorf("res=%d, ans=%d", res1, ans1)
+		return
+	} else {
+		t.Log("case1正确")
+	}
+
+	triangle2 := [][]int{
+		{-10},
+	}
+	ans2 := -10
+	res2 := MinimumTotal(triangle2)
+	if res2 != ans2 {
+		t.Errorf("res=%d, ans=%d", res2, ans2)
+		return
+	} else {
+		t.Log("case2正确")
+	}
+}
+
+func TestMinimumTotal2(t *testing.T) {
+	triangle1 := [][]int{
+		{2},
+		{3, 4},
+		{6, 5, 7},
+		{4, 1, 8, 3},
+	}
+	ans1 := 11
+	res1 := MinimumTotal2(triangle1)
+	if res1 != ans1 {
+		t.Errorf("res=%d, ans=%d", res1, ans1)
+		return
+	} else {
+		t.Log("case1正确")
+	}
+
+	triangle2 := [][]int{
+		{-10},
+	}
+	ans2 := -10
+	res2 := MinimumTotal2(triangle2)
+	if res2 != ans2 {
+		t.Errorf("res=%d, ans=%d", res2, ans2)
+		return
+	} else {
+		t.Log("case2正确")
+	}
+}
