@@ -100,3 +100,101 @@ func TestMinimumTotal2(t *testing.T) {
 		t.Log("case2正确")
 	}
 }
+
+func TestWiggleMaxLength(t *testing.T) {
+	var ans, res int
+	var nums []int
+	nums = []int{1, 7, 4, 9, 2, 5}
+	ans = 6
+	res = WiggleMaxLength(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{1, 17, 5, 10, 13, 15, 10, 5, 16, 8}
+	ans = 7
+	res = WiggleMaxLength(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{0, 0}
+	ans = 1
+	res = WiggleMaxLength(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
+
+func TestWiggleMaxLength2(t *testing.T) {
+	var ans, res int
+	var nums []int
+	nums = []int{1, 7, 4, 9, 2, 5}
+	ans = 6
+	res = WiggleMaxLength2(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{1, 17, 5, 10, 13, 15, 10, 5, 16, 8}
+	ans = 7
+	res = WiggleMaxLength2(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{0, 0}
+	ans = 1
+	res = WiggleMaxLength2(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
+
+func TestNumMatrix_SumRegion(t *testing.T) {
+	var matrix [][]int
+	matrix = [][]int{
+		{3, 0, 1, 4, 2},
+		{5, 6, 3, 2, 1},
+		{1, 2, 0, 1, 5},
+		{4, 1, 0, 1, 7},
+		{1, 0, 3, 0, 5},
+	}
+	var ans, res int
+	nm := ConstructorNumMatrix(matrix)
+	//ans = 8
+	//res = nm.SumRegion(2, 1, 4, 3)
+	//if res != ans {
+	//	t.Errorf("res=%d, ans=%d", res, ans)
+	//} else {
+	//	t.Log("case正确")
+	//}
+
+	ans = 11
+	res = nm.SumRegion(1, 1, 2, 2)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	//ans = 12
+	//res = nm.SumRegion(1, 2, 2, 4)
+	//if res != ans {
+	//	t.Errorf("res=%d, ans=%d", res, ans)
+	//} else {
+	//	t.Log("case正确")
+	//}
+}
