@@ -198,3 +198,16 @@ func TestNumMatrix_SumRegion(t *testing.T) {
 	//	t.Log("case正确")
 	//}
 }
+
+func TestCountSubstrings(t *testing.T) {
+	var s string
+	var ans, res int
+	s = "aaa"
+	ans = 6
+	res = CountSubstrings(s)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
