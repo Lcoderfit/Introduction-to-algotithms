@@ -211,3 +211,65 @@ func TestCountSubstrings(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestMaxSumDivThree(t *testing.T) {
+	var nums []int
+	var res, ans int
+	nums = []int{3, 6, 5, 1, 8}
+	ans = 18
+	res = MaxSumDivThree(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{4}
+	ans = 0
+	res = MaxSumDivThree(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{1, 2, 3, 4, 4}
+	ans = 12
+	res = MaxSumDivThree(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
+
+func TestMaxSumDivThree2(t *testing.T) {
+	var nums []int
+	var res, ans int
+	nums = []int{3, 6, 5, 1, 8}
+	ans = 18
+	res = MaxSumDivThree2(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{4}
+	ans = 0
+	res = MaxSumDivThree2(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{1, 2, 3, 4, 4}
+	ans = 12
+	res = MaxSumDivThree2(nums)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
