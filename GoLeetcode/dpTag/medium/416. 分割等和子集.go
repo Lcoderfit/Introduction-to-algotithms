@@ -84,7 +84,7 @@ func CanPartition2(nums []int) bool {
 	dp := make([]bool, target+1)
 	dp[0] = true
 	for i := 0; i < len(nums); i++ {
-		// 需要倒序动规，因为如果顺序动态规划，本来dp[j-nums[i]]会先被更新，保存的就不是上一次循环的结果，所以得到的dp[j]也就不是这一次循环的结果
+		// 需要倒序动规，因为如果顺序动态规划，dp[j-nums[i]]会先被更新，保存的就不是上一次循环的结果，所以得到的dp[j]也就不是这一次循环的结果
 		// 倒序动规，dp[j-nums[i]]保存的就是上一次循环的结果
 		for j := target; j >= nums[i]; j-- {
 			dp[j] = dp[j] || dp[j-nums[i]]

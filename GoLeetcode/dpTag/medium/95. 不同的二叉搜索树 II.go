@@ -19,6 +19,6 @@ package medium
  *     Right *TreeNode
  * }
  */
-func GenerateTrees(n int) []*TreeNode {
-
-}
+//func GenerateTrees(n int) []*TreeNode {
+//
+//}
