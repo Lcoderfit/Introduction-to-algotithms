@@ -273,3 +273,18 @@ func TestMaxSumDivThree2(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestFindMaxForm(t *testing.T) {
+	var strList []string
+	var m, n int
+	m, n = 5, 3
+	var ans, res int
+	strList = []string{"10", "0001", "111001", "1", "0"}
+	ans = 4
+	res = FindMaxForm(strList, m, n)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
