@@ -1,12 +1,16 @@
 /*
 
-方法1：替换法
-时间复杂度：O()
-空间复杂度：O()
+方法1：滑动窗口(从右往左滑动)
+时间复杂度：O(n)
+空间复杂度：O(1)
 
-方法2：滑动窗口
-时间复杂度：O()
-空间复杂度：O()
+方法2和3：滑动窗口（从左往右滑动）
+时间复杂度：O(n)
+空间复杂度：O(1)
+
+方法4：滑动窗口+前缀和(空间复杂度比较高，暂不写)
+时间复杂度：O(n)
+空间复杂度：O(n)
 
 case1:
 
@@ -28,8 +32,7 @@ func MaxScore(cardPoints []int, k int) int {
 	ans := sum
 	n := len(cardPoints)
 	for i := 0; i < k; i++ {
-		// 最右边的一个元素，需要用左边的第k-i-1位置的元素来换，
-		// 因为如果右边只取了一个，则左边肯定取了k-1个，由于是从外取到里面，所以肯定是第k个取不到
+		// 滑动窗口，从右往左滑动，滑动时先减去右窗口右边的元素，然后加上左窗口左边的元素
 		sum += cardPoints[n-i-1] - cardPoints[k-i-1]
 		ans = Max(ans, sum)
 	}
@@ -48,10 +51,31 @@ func MaxSorce2(cardPoints []int, k int) int {
 	for i := 0; i < n; i++ {
 		sum += cardPoints[i]
 		windowsSum += cardPoints[i]
-		if i > windowsSize - 1 {
+		if i > windowsSize-1 {
 			windowsSum -= cardPoints[i-windowsSize]
 			ans = Min(ans, windowsSum)
 		}
 	}
 	return sum - ans
+}
+
+func MaxScore3(cardPoints []int, k int) int {
+	if cardPoints == nil || len(cardPoints) == 0 || k == 0 {
+		return 0
+	}
+
+	// 计算元素总和
+	sum := Sum(cardPoints...)
+	// 计算初始窗口元素和
+	windowsSize := len(cardPoints) - k
+	windowsSum := Sum(cardPoints[:windowsSize]...)
+	minWindowsSum := 0
+
+	// 窗口进行滑动，取最小窗口元素和，用所有元素总和减去最小窗口和即为符合题意的最大值
+	minWindowsSum = windowsSum
+	for i := windowsSize; i < len(cardPoints); i++ {
+		windowsSum += cardPoints[i] - cardPoints[i-windowsSize]
+		minWindowsSum = Min(minWindowsSum, windowsSum)
+	}
+	return sum - minWindowsSum
 }
