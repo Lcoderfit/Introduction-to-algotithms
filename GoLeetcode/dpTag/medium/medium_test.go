@@ -288,3 +288,19 @@ func TestFindMaxForm(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestNumDecodings(t *testing.T) {
+	var sList []string
+	var ans []int
+	sList = []string{"12", "226", "0", "06", "101", "1001", "230", "110"}
+	ans = []int{2, 3, 0, 0, 1, 0, 0, 1}
+
+	for i := range sList {
+		res := NumDecodings(sList[i])
+		if res != ans[i] {
+			t.Errorf("res=%d, ans=%d", res, ans[i])
+		} else {
+			t.Log("case正确")
+		}
+	}
+}
