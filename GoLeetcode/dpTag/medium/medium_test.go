@@ -304,3 +304,38 @@ func TestNumDecodings(t *testing.T) {
 		}
 	}
 }
+
+func TestLongestSubSequence(t *testing.T) {
+	var arr []int
+	var difference int
+	var res, ans int
+	arr = []int{1, 2, 3, 4}
+	difference = 1
+	ans = 4
+	res = LongestSubSequence(arr, difference)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	arr = []int{1, 3, 5, 7}
+	difference = 1
+	ans = 1
+	res = LongestSubSequence(arr, difference)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	arr = []int{1, 5, 7, 8, 5, 3, 4, 2, 1}
+	difference = -2
+	ans = 4
+	res = LongestSubSequence(arr, difference)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
