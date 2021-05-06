@@ -339,3 +339,16 @@ func TestLongestSubSequence(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestCountNumbersWithUniqueDigits(t *testing.T) {
+	var n int
+	var res, ans int
+	n = 3
+	ans = 739
+	res = CountNumbersWithUniqueDigits2(n)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
