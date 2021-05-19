@@ -273,3 +273,82 @@ func TestMaxSumDivThree2(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestFindMaxForm(t *testing.T) {
+	var strList []string
+	var m, n int
+	m, n = 5, 3
+	var ans, res int
+	strList = []string{"10", "0001", "111001", "1", "0"}
+	ans = 4
+	res = FindMaxForm(strList, m, n)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
+
+func TestNumDecodings(t *testing.T) {
+	var sList []string
+	var ans []int
+	sList = []string{"12", "226", "0", "06", "101", "1001", "230", "110"}
+	ans = []int{2, 3, 0, 0, 1, 0, 0, 1}
+
+	for i := range sList {
+		res := NumDecodings(sList[i])
+		if res != ans[i] {
+			t.Errorf("res=%d, ans=%d", res, ans[i])
+		} else {
+			t.Log("case正确")
+		}
+	}
+}
+
+func TestLongestSubSequence(t *testing.T) {
+	var arr []int
+	var difference int
+	var res, ans int
+	arr = []int{1, 2, 3, 4}
+	difference = 1
+	ans = 4
+	res = LongestSubSequence(arr, difference)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	arr = []int{1, 3, 5, 7}
+	difference = 1
+	ans = 1
+	res = LongestSubSequence(arr, difference)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	arr = []int{1, 5, 7, 8, 5, 3, 4, 2, 1}
+	difference = -2
+	ans = 4
+	res = LongestSubSequence(arr, difference)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
+
+func TestCountNumbersWithUniqueDigits(t *testing.T) {
+	var n int
+	var res, ans int
+	n = 3
+	ans = 739
+	res = CountNumbersWithUniqueDigits2(n)
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}

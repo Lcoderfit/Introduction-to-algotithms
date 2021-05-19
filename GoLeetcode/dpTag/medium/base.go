@@ -22,3 +22,15 @@ func Max(nums ...int) int {
 	}
 	return result
 }
+
+// 求总和
+func Sum(nums ...int) int {
+	if nums == nil || len(nums) == 0 {
+		return 0
+	}
+	ans := 0
+	for _, v := range nums {
+		ans += v
+	}
+	return ans
+}
