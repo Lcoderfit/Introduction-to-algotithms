@@ -32,8 +32,12 @@ func MaxProfitII1(prices []int) int {
 func MaxProfitII2(prices []int) int {
 	dp0, dp1 := 0, -prices[0]
 	for i := 1; i < len(prices); i++ {
-		dp0 = Max(dp0, dp1+prices[i])
-		dp1 = Max(dp1, dp0-prices[i])
+		// 注意，计算现有层dp必须使用上一层的dp，如果用：
+		// dp0 = Max(dp0, dp1+prices[i])
+		// dp1 = Max(dp1, dp0-prices[i])
+		// 其实是不正确的，因为计算计算dp1的时候，用到的dp0已经变成了当前层的dp0，而不是上一层的dp0
+		//
+		dp0, dp1 = Max(dp0, dp1+prices[i]), Max(dp1, dp0-prices[i])
 	}
 	return dp0
 }
