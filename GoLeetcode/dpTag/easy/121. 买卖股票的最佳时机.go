@@ -1,6 +1,8 @@
-package dp
+package easy
 
-import "math"
+import (
+	"math"
+)
 
 //方法一
 func MaxProfit(prices []int) int {
@@ -14,14 +16,14 @@ func MaxProfit(prices []int) int {
 		if sum < 0 {
 			sum = 0
 		} else {
-			maxVal = max(maxVal, sum)
+			maxVal = Max(maxVal, sum)
 		}
 	}
 	return maxVal
 }
 
 //方法二
-func maxProfit(prices []int) int {
+func MaxProfit2(prices []int) int {
 	if len(prices) <= 1 {
 		return 0
 	}
@@ -43,12 +45,13 @@ func maxProfit(prices []int) int {
 }
 
 //方法三
-func MaxProfit2(prices []int) int {
+func MaxProfit3(prices []int) int {
 	minPrice := int(math.MaxInt32)
 	maxPrice := 0
+	// 遍历数组，取prices[i]减去prices[0...i-1]中的最小值，然后取差值的最大值即可
 	for _, price := range prices {
-		maxPrice = max(maxPrice, price-minPrice)
-		minPrice = min(minPrice, price)
+		maxPrice = Max(maxPrice, price-minPrice)
+		minPrice = Min(minPrice, price)
 	}
 	return maxPrice
 }
