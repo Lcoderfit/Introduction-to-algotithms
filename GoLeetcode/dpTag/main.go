@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoLeetcode/dpTag/dp"
+	"GoLeetcode/dpTag/easy"
 	"GoLeetcode/dpTag/medium"
 	"fmt"
 )
@@ -33,7 +34,7 @@ func maxProfit() {
 			fmt.Scanf("%d", &t)
 			prices[i] = t
 		}
-		ret := dp.MaxProfit(prices)
+		ret := easy.MaxProfit(prices)
 		fmt.Println("maxProfit: ", ret)
 	}
 }
