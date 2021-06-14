@@ -352,3 +352,34 @@ func TestCountNumbersWithUniqueDigits(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestFindNumberOfLIS(t *testing.T) {
+	var nums []int
+	var res, ans int
+	nums = []int{1, 3, 5, 4, 7}
+	res = FindNumberOfLIS(nums)
+	ans = 2
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{2, 2, 2, 2, 2}
+	res = FindNumberOfLIS(nums)
+	ans = 5
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+
+	nums = []int{1, 2, 4, 3, 5, 4, 7, 2}
+	res = FindNumberOfLIS(nums)
+	ans = 3
+	if res != ans {
+		t.Errorf("res=%d, ans=%d", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
