@@ -3,6 +3,14 @@
 时间复杂度：O(n^2)
 空间复杂度：O(n^2)
 
+方法2：二维动态
+时间复杂度：O(n^2)
+空间复杂度：O(n)
+
+方法2：数学法
+时间复杂度：O(1)
+空间复杂度：O(1)
+
 case1:
 
 r:
@@ -11,7 +19,6 @@ r:
 package medium
 
 import "math"
-
 
 func TwoEggDrop(n int) int {
 	if n == 0 {
@@ -39,4 +46,26 @@ func TwoEggDrop(n int) int {
 		}
 	}
 	return dp[2][n]
+}
+
+func TwoEggDrop1(n int) int {
+	if n == 0 {
+		return 0
+	}
+	dp := make([]int, n+1)
+	// 因为需要计算当j属于[1~i]时dp[i]的最小值，所以dp[i]初始值应该设置为最大值，不然结果就总是0了
+	for i := 1; i <= n; i++ {
+		dp[i] = math.MaxInt32
+		for j := 1; j <= i; j++ {
+			dp[i] = Min(dp[i], Max(j-1, dp[i-j])+1)
+		}
+	}
+	return dp[n]
+}
+
+func TwoEggDrop2(n int) int {
+	if n == 0 {
+		return 0
+	}
+	return int(math.Ceil((math.Sqrt(float64(8*n+1)) - 1) / 2))
 }
