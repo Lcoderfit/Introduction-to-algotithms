@@ -383,3 +383,16 @@ func TestFindNumberOfLIS(t *testing.T) {
 		t.Log("case正确")
 	}
 }
+
+func TestCheckValidString(t *testing.T) {
+	var s string
+	var res, ans bool
+	s = "(((((*(()((((*((**(((()()*)()()()*((((**)())*)*)))))))(())(()))())((*()()(((()((()*(())*(()**)()(())"
+	res = CheckValidString(s)
+	ans = false
+	if res != ans {
+		t.Errorf("res=%v, ans=%v", res, ans)
+	} else {
+		t.Log("case正确")
+	}
+}
