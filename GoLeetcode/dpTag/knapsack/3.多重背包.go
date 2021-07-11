@@ -30,6 +30,45 @@ r:
 */
 package knapsack
 
-func MultipleChoiceKnapsack(size int) {
+func MultipleChoiceKnapsack(m int, v, w, s []int) int {
+	dp := make([]int, m+1)
+	n := len(v)
+	for i := 0; i < n; i++ {
+		for j := m; j >= v[i]; j-- {
+			for k := 1; k <= s[i] && k*v[i] <= j; k++ {
+				dp[j] = Max(dp[j], dp[j-k*v[i]]+k*w[i])
+			}
+		}
+	}
+	return dp[m]
+}
 
+type Good struct {
+	V int
+	W int
+}
+
+func MultipleChoiceKnapsack1(m int, v, w, s []int) int {
+	dp := make([]int, m+1)
+	n := len(v)
+	goods := make([]Good, 0)
+
+	// 每种物品有si个，就根据快速幂将每种的si个物品拆分为log2(si)种物品(向上取整)
+	for i := 0; i < n; i++ {
+		t := s[i]
+		for k := 1; k <= t; k *= 2 {
+			t -= k
+			goods = append(goods, Good{V: k * v[i], W: k * w[i]})
+		}
+		if t > 0 {
+			goods = append(goods, Good{V: t * v[i], W: t * w[i]})
+		}
+	}
+
+	for _, good := range goods {
+		for j := m; j >= good.V; j-- {
+			dp[j] = Max(dp[j], dp[j-good.V]+good.W)
+		}
+	}
+	return dp[m]
 }
