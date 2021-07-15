@@ -969,15 +969,65 @@ if err != nil {
 
 fmt.Println(content)
 
+// 写入文件
+
+os.OpenFile(name string, flag int, perm FileMode)
+name: 要打开的文件名
+flag: 打开文件的模式
+
+os.O_WRONLY 只写
+os.O_CREATE 创建文件
+os.O_RDONLY 只读
+os.O_RDWR  读写
+os.O_TRUNC 清空
+os.O_APPEND 追加
+
+
+r 04
+w 02
+x 01
+
+
+// 写入字节切片和字符串
+// O_xxx 通过不同的二进制位表示不同的意义
+// O_TRUNC 相当于每次都重新写入
+
+file, err := os.OpenFile("a.txt", O_APPEND|O_CREATE, 0644)
+if err != nil {
+    
+}
+file.Write([]byte("lkjsdf"))
+file.WriteString("hello world")
+
+// 写入缓冲区
+wr := bufio.NewWriter(fileObj)
+wr.WriteString("kjasdf")
+wr.Flush() // 将缓存中的内容写入文件
+
+// io.utils
+
+fileObj, err := ioutils.WriteFile(filename, []byte(), 0666)
+if err != nil {
+    fmt.Println("Lcoderfit")
+    return
+}
+
+// 读取到空白符停止     
+fmt.Scanln(&s)
+
+
+// 从标准输入读取
+var s string
+reader := bufio.NewReader(os.Stdin)
+s, _ := reader.ReadString('\n') // 读取到\n结束
 
 
 
-
-
-
-
-
-
+// 在文件中间插入
+file, err := os.OpenFile(file_name, os.O_WRRD, 0644)
+file.Seek(3, 0) // 第一个参数是偏移量，第二个参数是相对位置，0表示相对文件开头
+// 相对文件开头偏移三个字节后写入文件
+file.Write([]byte('c'))
 
 
 
