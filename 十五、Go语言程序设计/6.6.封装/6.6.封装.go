@@ -13,6 +13,10 @@ func main() {
 	a.Reset()
 	res = a.N()
 	fmt.Println(res)
+
+	p := person{age: 10}
+	p.addAge1()
+	fmt.Println(p.age)
 }
 
 // type Buffer struct {
@@ -30,6 +34,24 @@ func main() {
 // 		b.buf = buf
 // 	}
 // }
+
+type person struct {
+	age int
+}
+
+func (p person) addAge() {
+	p.age++
+}
+
+func (p *person) addAge1() {
+	p.age++
+}
+
+func newPerson(age int) *person {
+	return &person{
+		age: age,
+	}
+}
 
 type Counter struct {
 	n int

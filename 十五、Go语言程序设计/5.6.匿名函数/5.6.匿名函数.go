@@ -15,9 +15,6 @@ func main() {
 	fmt.Println(f())
 
 	d()
-	k := map[string][]string{
-		"a": {"b"},
-	}
 }
 
 func a() {
