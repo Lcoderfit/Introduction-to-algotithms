@@ -1,4 +1,4 @@
-# Go环境配置
+# Go基础知识文档
 
 ```text
 1.GOROOT: 安装GO的路径
@@ -1039,6 +1039,20 @@ time.Now() //获取当前时间(2021-01-01 10:10:10.1111 +0800 .....)
 now.Year() 
 
 // 
+
+
+```
+
+```text
+日志级别
+
+// Trace和Debug的区别，Debug会在Debug版本下输出，但是在Release下不会输出，Trace会在Release下输出
+1.Debug
+2.Trace
+3.Info
+4.Warning
+5.Error
+6.Fatal
 
 
 ```
