@@ -20,7 +20,7 @@ func main() {
 	//300. 最长上升子序列.go
 	//lengthOfLIS()
 
-	//1143. 最长公共子序列.go
+	//1143. 最长公共子序列.go.go
 	//longestCommonSubsequence()
 
 	s := "lcoder最长公共子序列asdf"
@@ -36,7 +36,6 @@ func CountCn(s string) int {
 	}
 	return count
 }
-
 
 //121. 买卖股票的最佳时机.go
 func maxProfit() {
@@ -121,7 +120,7 @@ func lengthOfLIS() {
 	}
 }
 
-//1143. 最长公共子序列.go
+//1143. 最长公共子序列.go.go
 func longestCommonSubsequence() {
 	var text1, text2 string
 	for {
