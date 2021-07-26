@@ -139,3 +139,5 @@ func PrintMethod(x interface{}) {
 		v.Method(i).Call(args)
 	}
 }
+//isNil() 报告v持有的值是否为nil，v持有的值分类必须是通道、函数、接口、映射、指针、切片之一（引用类型）
+// 否则会panic

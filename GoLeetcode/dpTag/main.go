@@ -5,6 +5,7 @@ import (
 	"GoLeetcode/dpTag/easy"
 	"GoLeetcode/dpTag/medium"
 	"fmt"
+	"unicode"
 )
 
 func main() {
@@ -19,8 +20,21 @@ func main() {
 	//300. 最长上升子序列.go
 	//lengthOfLIS()
 
-	//1143. 最长公共子序列.go
-	longestCommonSubsequence()
+	//1143. 最长公共子序列.go.go
+	//longestCommonSubsequence()
+
+	s := "lcoder最长公共子序列asdf"
+	fmt.Println(CountCn(s))
+}
+
+func CountCn(s string) int {
+	count := 0
+	for _, c := range s {
+		if unicode.Is(unicode.Han, c) {
+			count++
+		}
+	}
+	return count
 }
 
 //121. 买卖股票的最佳时机.go
@@ -106,7 +120,7 @@ func lengthOfLIS() {
 	}
 }
 
-//1143. 最长公共子序列.go
+//1143. 最长公共子序列.go.go
 func longestCommonSubsequence() {
 	var text1, text2 string
 	for {
