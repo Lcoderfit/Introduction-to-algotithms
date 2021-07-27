@@ -104,10 +104,9 @@ func loadIni(filename string, data interface{}) (err error) {
 			}
 			// 遍历嵌套结构体的每一个字段判断，tag是否为取出的key
 			var fieldName string
-			var fileType reflect.StructField
+			var field reflect.StructField
 			for i := 0; i < structObj.NumField(); i++ {
-				field := sType.Field(i)
-				fileType = field
+				field = sType.Field(i)
 				if field.Tag.Get("ini") == key {
 					// 从结构体中找到与ini配置相匹配的字段
 					// 反射获取的结构体字段，均有Type，Name等多种属性
@@ -122,8 +121,8 @@ func loadIni(filename string, data interface{}) (err error) {
 			// 从结构体中根据找到的字段名获取字段对象
 			// 并将该字段对象设置为ini配置中的value
 			fileObj := sValue.FieldByName(fieldName)
-			fmt.Println(fieldName, fileType.Type.Kind())
-			switch fileType.Type.Kind() {
+			fmt.Println(fieldName, field.Type.Kind())
+			switch field.Type.Kind() {
 			case reflect.String:
 				fileObj.SetString(value)
 			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
