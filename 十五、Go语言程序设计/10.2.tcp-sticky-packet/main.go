@@ -22,5 +22,4 @@ mspaint: 打开画图功能
 */
 
 func main() {
-
 }
