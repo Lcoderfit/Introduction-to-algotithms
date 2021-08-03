@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net"
+	"strings"
 )
 
 func main() {
@@ -10,11 +11,12 @@ func main() {
 		IP:   net.IPv4(0, 0, 0, 0),
 		Port: 10000,
 	})
-	defer listen.Close()
 	if err != nil {
 		fmt.Println("连接服务端失败, err:", err)
 		return
 	}
+	defer listen.Close()
+
 	for {
 		var data [1024]byte
 		// 无需建立连接，直接收发数据
@@ -26,9 +28,12 @@ func main() {
 			fmt.Println("读取数据失败: ", err)
 			continue
 		}
-		fmt.Printf("data: %v, addr:%v, err:%v\n", string(data[:n]), addr, err)
+		d := strings.TrimSpace(string(data[:n]))
+		fmt.Printf("data: %v, addr:%v, err:%v\n", d, addr, err)
+
+		reply := strings.ToUpper(string(data[:n]))
 		// 与WriteTo类型，但是需要传入一个UDP地址
-		_, err = listen.WriteToUDP(data[:n], addr)
+		_, err = listen.WriteToUDP([]byte(reply), addr)
 		if err != nil {
 			fmt.Println("write to udp failed, err:", err)
 			continue
