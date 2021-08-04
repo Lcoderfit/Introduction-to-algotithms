@@ -1,4 +1,4 @@
-package main
+package test
 
 import (
 	"fmt"
@@ -47,12 +47,25 @@ func main() {
 
 // 实现字符串分割函数
 func Split(str string, sep string) []string {
-	var ret []string
+	//var ret []string
+	// 预估容量，减少内存分配次数
+	ret := make([]string, 0, strings.Count(str, sep)+1)
 	index := strings.Index(str, sep)
 	for index > -1 {
 		ret = append(ret, str[:index])
-		str = str[index+1:]
+		str = str[index+len(sep):]
 		index = strings.Index(str, sep)
 	}
+	ret = append(ret, str)
 	return ret
+}
+
+func Fib(n int) int {
+	x, y := 0, 1
+	z := 0
+	for i := 0; i < n; i++ {
+		x = x + y
+		y = x + y
+	}
+	return x
 }
