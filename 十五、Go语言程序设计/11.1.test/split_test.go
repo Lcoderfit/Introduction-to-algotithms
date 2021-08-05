@@ -3,6 +3,7 @@ package test
 import (
 	"reflect"
 	"testing"
+	"time"
 )
 
 /*
@@ -38,6 +39,11 @@ go tool cover -html=c.out // 处理生成的覆盖率信息，
 
 // 预分配容量，减少内存分配次数
 ret := make([]string, 0, strings.Count(str, sep)+1)
+
+// 基准测试，至少会运行1s
+// 指定基准测试时间(-bench=后面跟的是基准测试函数名，例如Fib40指的是
+// 函数名中包含bench的名字)
+go test -bench=Fib40 -benchtime=20s
 
 */
 
@@ -147,5 +153,73 @@ func BenchmarkSplit(b *testing.B) {
 	// 执行了N遍Split函数
 	for i := 0; i < b.N; i++ {
 		Split("a:b:c:d:e", ":")
+	}
+}
+
+// 性能比较函数
+// 上面的基准测试只能得到给定操作的绝对耗时, 下面的示例用于计算相对耗时
+// 例如：同一个函数处理1000个元素的耗时与处理1w甚至100w个元素的耗时差别
+// 或者处理同一个任务的不同算法的耗时
+func benchmarkFib(b *testing.B, n int) {
+	for i := 0; i < b.N; i++ {
+		Fib(n)
+	}
+}
+
+func BenchmarkFib1(b *testing.B) {
+	benchmarkFib(b, 1)
+}
+
+func BenchmarkFib2(b *testing.B) {
+	benchmarkFib(b, 2)
+}
+
+func BenchmarkFib3(b *testing.B) {
+	benchmarkFib(b, 3)
+}
+
+func BenchmarkFib20(b *testing.B) {
+	benchmarkFib(b, 30)
+}
+
+// goos: windows
+// goarch: amd64
+// pkg: test
+// BenchmarkFib1-8         228748588                5.18 ns/op
+// BenchmarkFib2-8         85927262                14.2 ns/op
+// BenchmarkFib3-8         50043787                24.2 ns/op
+// BenchmarkFib20-8              92          13898079 ns/op
+// BenchmarkFib40-8               1        1644599400 ns/op
+// PASS
+//
+// Fib40只运行了1次（默认情况下，每个基准测试至少运行1s）
+// 如果要多次运行Fib40，可以指定最小基准测试时间
+// go test -bench=Fib40 -benchtime=20s
+// 跑长一点时间计算出来的平均操作耗时更准确
+func BenchmarkFib40(b *testing.B) {
+	benchmarkFib(b, 40)
+}
+
+// 重置基准测试时间, 去除掉一些无关的耗时操作
+func BenchmarkSplit2(b *testing.B) {
+	// 假设需要做一些耗时的无关操作
+	time.Sleep(5 * time.Second)
+	// 重置计时器
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		Split("沙河又沙又有河", "沙")
+	}
+}
+
+// 并行测试
+// 会以并行的方式执行给定的基准测试
+// go test -bench=Split -cpu=1
+func BenchmarkSplit3(b *testing.B) {
+	// 假设需要做一些耗时的无关操作
+	time.Sleep(5 * time.Second)
+	// 重置计时器
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		Split("沙河又沙又有河", "沙")
 	}
 }

@@ -60,12 +60,18 @@ func Split(str string, sep string) []string {
 	return ret
 }
 
-func Fib(n int) int {
+func FibIter(n int) int {
 	x, y := 0, 1
-	z := 0
 	for i := 0; i < n; i++ {
 		x = x + y
 		y = x + y
 	}
 	return x
+}
+
+func Fib(n int) int {
+	if n < 2 {
+		return n
+	}
+	return Fib(n-1) + Fib(n-2)
 }
