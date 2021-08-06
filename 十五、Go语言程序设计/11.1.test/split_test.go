@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 	"time"
@@ -40,10 +41,48 @@ go tool cover -html=c.out // 处理生成的覆盖率信息，
 // 预分配容量，减少内存分配次数
 ret := make([]string, 0, strings.Count(str, sep)+1)
 
-// 基准测试，至少会运行1s
+// 基准测试，至少会运行1s, 如果不到1s，基准函数中的b.N会逐渐增加，1，2，5，10，20，50.。。。
 // 指定基准测试时间(-bench=后面跟的是基准测试函数名，例如Fib40指的是
 // 函数名中包含bench的名字)
 go test -bench=Fib40 -benchtime=20s
+
+// 首字符小写，并添加一个n参数，用于被其他基准测试函数调用
+func benchmarkFib(b *testing.B, n int) {
+	for i := 0; i < b.N; i++ {
+		Fib(n)
+	}
+}
+
+// 运行Fib(1)
+func BenchmarkFib1(b *testing.B) {
+	benchmarkFib(b, 1)
+}
+
+// 运行Fib(2)
+func BenchmarkFib2(b *testing.B) {
+	benchmarkFib(b, 2)
+}
+
+3.运行所有基准测试
+go test -bench=.
+
+4.并行测试(parallel 并行的)
+// RunParallel会创建多个goroutine，默认goroutine的数量为GOMAXPROCS
+// go test -bench=Split -cpu=1
+func BenchmarkSplit3Parallel(b *testing.B) {
+	// 设置默认使用的cpu核数, 实际最大cpu核数不超过本机cpu核数
+	// 如果测试时传入 -cpu参数，则会使用-cpu参数设置的值
+	//b.SetParallelism(1)
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			Split("沙河有沙又有河", "沙")
+		}
+	})
+}
+
+5.Setup 和 TearDown
+
+6.Example test
 
 */
 
@@ -213,13 +252,41 @@ func BenchmarkSplit2(b *testing.B) {
 
 // 并行测试
 // 会以并行的方式执行给定的基准测试
+// RunParallel会创建多个goroutine，默认goroutine的数量为GOMAXPROCS
 // go test -bench=Split -cpu=1
-func BenchmarkSplit3(b *testing.B) {
-	// 假设需要做一些耗时的无关操作
-	time.Sleep(5 * time.Second)
-	// 重置计时器
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		Split("沙河又沙又有河", "沙")
-	}
+func BenchmarkSplit3Parallel(b *testing.B) {
+	// 设置默认使用的cpu核数, 实际最大cpu核数不超过本机cpu核数
+	// 如果测试时传入 -cpu参数，则会使用-cpu参数设置的值
+	//b.SetParallelism(1)
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			Split("沙河有沙又有河", "沙")
+		}
+	})
+}
+
+// 示例函数，被go test特殊对待的第三种函数，既没有参数也没有返回值
+// 示例函数的好处：
+// 1.示例函数会生成godoc文档
+// 2.示例函数如果包含了 Output: 则也是可以通过go test 运行的可执行测试
+//
+// --- FAIL: ExampleSplit (0.00s)
+// got:
+// [a b c]
+// [ 河有 又有河]
+// want:
+// [a b c]
+// [河有 又有河]
+// FAIL
+// exit status 1
+// FAIL    test    0.750s
+//
+//E:\SocialProject\Algorithms-Tags\Introduction-to-algotithms\十五、Go
+//语言程序设计\11.1.test>go test -run ExampleSplit
+func ExampleSplit() {
+	fmt.Println(Split("a:b:c", ":"))
+	fmt.Println(Split("沙河有沙又有河", "沙"))
+	// Output:
+	// [a b c]
+	// [ 河有 又有河]
 }
