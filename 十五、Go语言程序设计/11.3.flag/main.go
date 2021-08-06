@@ -18,7 +18,14 @@ go run main.go --help
   -name string
         请输入名字 (default "coder")
 
-2.
+// 第一个参数是flag参数名: -name
+// 第二个参数是参数默认值
+// 第三个是使用信息，用 go run main.go --help弹出
+2.flag.String("name", "coder", "名字")
+
+// 从命令行参数中获取name参数的值，解析后赋给name变量
+var name string
+3.flag.StringVar(&name, "name", "coder", "名字")
 
 
 */
@@ -26,6 +33,10 @@ go run main.go --help
 // os.Args 获取命令行参数
 func main() {
 	//fmt.Println(os.Args)
+
+	// 第一个参数是flag参数名: -name
+	// 第二个参数是参数默认值
+	// 第三个是使用信息，用 go run main.go --help弹出
 	name := flag.String("name", "coder", "请输入名字")
 	age := flag.Int("age", 9000, "请输入真实年龄")
 	married := flag.Bool("married", false, "结婚了吗")
