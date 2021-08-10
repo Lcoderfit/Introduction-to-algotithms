@@ -32,8 +32,37 @@ type User struct {
 
 // 查询
 func query() {
-	//sqlStr := "select name, age from user where id=?"
-	//var u User
+	sqlStr := "select name, age from user where id=?"
+	var u1 User
+	// 内部会自动关闭
+	// 必须传入指针，否则不会修改其值
+	rowObj := db.QueryRow(sqlStr, 1)
+	rowObj.Scan(&u1.id, &u1.name, &u1.age)
+	// 打印结构
+	fmt.Printf("%v\n", u1)
+}
+
+// 查询多条语句
+func queryMore(n int) {
+	// 1.
+	sqlStr := `select id, name, age from user where id > ?;`
+	rows, err := db.Query(sqlStr, n)
+	if err != nil {
+		fmt.Printf("exec %s query failed, err:%v\n", sqlStr, err)
+		return
+	}
+	// 一定要关闭rows
+	defer rows.Close()
+	// 4.循环取值
+	for rows.Next() {
+		var u1 User
+		err := rows.Scan(&u1.id, &u1.name, &u1.age)
+		if err != nil {
+			fmt.Printf("scan failed:%s\n", err)
+			return
+		}
+		fmt.Printf("%#v\n", u1)
+	}
 }
 
 // 插入
@@ -60,6 +89,13 @@ func initDB() (err error) {
 		fmt.Printf("open %s failed, err:%v\n", dsn, err)
 		return
 	}
+	// 设置与数据库建立连接的最大数目，如果n大于0且小于最大闲置连接数，则最大闲置连接数
+	// 会设置为最大连接数，如果n<=0,则最大连接数无限制
+	db.SetMaxOpenConns(10)
+
+	// 设置最大空闲连接数，如果n<=0,则无最大空闲连接数，如果n大于最大连接数，则最大空闲连接数为最大连接数
+	// 所有的连接，不可能一直空闲，当空闲时间太长会断开，只留下一定数据的连接
+	db.SetMaxIdleConns(5)
 	return
 }
 
@@ -72,14 +108,16 @@ func main() {
 	fmt.Println("数据库连接成功")
 
 	// 1.查询单条记录
-	sqlStr := `select id, name, age from user where id=?`
-	var u1 User
+	//sqlStr := `select id, name, age from user where id=?`
 
-	// 最多查询一条记录，args表示sqlStr中的？所代表的参数
-	rowObj := db.QueryRow(sqlStr, 1)
-	// 内部会自动关闭
-	rowObj.Scan(&u1.id, &u1.name, &u1.age)
-	// 打印结构
-	fmt.Printf("%v\n", u1)
+	// 如果设置最大连接数为10，下面的循环有11次，需要11个连接，
+	// 则最后一次连接会阻塞
+	//for i := 1; i <= 11; i++ {
+	//	// 最多查询一条记录，args表示sqlStr中的？所代表的参数
+	//	// 到连接池中拿出一个连接用于查询
+	//	_ = db.QueryRow(sqlStr, 1)
+	//	fmt.Printf("已查询了%d次\n", i)
+	//}
 
+	queryMore(0)
 }
