@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 /*
-select可以同时响应多个通道操作，没个case对应一个通道接收或发送操作
+select可以同时响应多个通道操作，每个case对应一个通道接收或发送操作
 select会一直等待，直到某一个通道操作完成，则执行对应的case语句，
 如果有多个case满足条件，则随机执行一个,
 如果所有条件都不满足则执行default
