@@ -18,6 +18,16 @@ import (
 1.使用带标签的break
 2.return
 3.使用flag
+
+
+ctx, cancel := withCancel(parentContext)
+withCancel传入一个根上下文，返回根上下文的一个副本，即子上下文，
+当调用cancel函数或关闭父上下文的Done通道时，将关闭返回上下文的Done通道
+
+
+withDeadline
+withTimeout
+withValue
 */
 
 var wg sync.WaitGroup
