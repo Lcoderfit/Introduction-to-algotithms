@@ -1,4 +1,4 @@
-package sortTag
+package sort
 
 import (
 	"GoLeetcode/dataStructTag/utils"

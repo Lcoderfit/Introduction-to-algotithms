@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoLeetcode/dataStructTag/sortTag"
+	"GoLeetcode/dataStructTag/sortTag/sort"
 	"fmt"
 )
 
@@ -11,8 +11,8 @@ func main() {
 }
 
 func mergeSort() {
-	arr := sortTag.RandomArray(10, 10)
+	arr := sort.RandomArray(10, 10)
 	fmt.Println("归并排序前：", arr)
-	sortTag.MergeSort(arr)
+	sort.MergeSort(arr)
 	fmt.Println("归并排序后：", arr)
 }

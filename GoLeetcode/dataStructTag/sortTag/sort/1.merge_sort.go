@@ -1,4 +1,4 @@
-package sortTag
+package sort
 
 import (
 	"math"
@@ -24,8 +24,8 @@ func MergeSort(arr []int) {
 	leftArr := make([]int, mid+1)
 	rightArr := make([]int, len(arr)-mid+1)
 	//将最后一个元素设置成最大，防止leftArr或者rightArr其中一个比较完之后导致错误
-	leftArr[len(leftArr) - 1] = math.MaxInt32
-	rightArr[len(rightArr) - 1] = math.MaxInt32
+	leftArr[len(leftArr)-1] = math.MaxInt32
+	rightArr[len(rightArr)-1] = math.MaxInt32
 
 	//将arr左右两边的数据转移到leftArr和rightArr
 	copy(leftArr, arr[:mid])
