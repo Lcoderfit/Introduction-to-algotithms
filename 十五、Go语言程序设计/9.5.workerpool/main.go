@@ -10,6 +10,8 @@ import (
 */
 
 func worker(id int, jobs <-chan int, results chan<- int) {
+	// 因为管道中的元素是读一个少一个，所以多个goroutine并发执行时
+	// 不会出现两个goroutine读取到同一个元素的情况
 	for j := range jobs {
 		fmt.Printf("worker:%d start job:%d\n", id, j)
 		time.Sleep(time.Second)
