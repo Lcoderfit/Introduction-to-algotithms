@@ -4,7 +4,7 @@ import "math"
 
 /*
 	    平均        最好          最坏        空间        稳定性
-时间   O(nlogn)   O(nlogn)     O(nlogn)     O(n^2)        稳定
+时间   O(nlogn)   O(nlogn)     O(nlogn)     O(n)        稳定
 */
 //不需要返回值，直接操作
 //先把数组分成两部分，然后对这两部分进行递归分治，最后将排好序的两部分合并起来
@@ -45,7 +45,6 @@ func MergeSort(arr []int) []int {
 	}
 	return merge
 }
-
 
 func MergeSort1(arr []int) {
 	if len(arr) < 2 {

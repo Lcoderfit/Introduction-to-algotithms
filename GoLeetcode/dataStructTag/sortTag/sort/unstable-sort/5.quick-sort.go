@@ -8,6 +8,8 @@
  					2^k< n < 2^(k + 1)，k< logn < k + 1, 所以k取logn
 2、平均：O(nlogn) ????
 3、最差：每一次取到的元素刚好是最小的，O(n^2); T(n) = (n-1) + (n-1) + ... + 1 = n(n-1)/2 = O(n^2)
+
+空间复杂度：O(logN) 每次递归都需要传入start和end，总共递归logn层，所以是logn
 */
 
 package unstable_sort
@@ -25,7 +27,7 @@ func partition(arr []int, start, end int) int {
 	pivot, i, j := arr[start], start, end
 	for i < j {
 		// 大于pivot的放右边
-		for i < j && arr[j] > pivot  {
+		for i < j && arr[j] > pivot {
 			j--
 		}
 		if i < j {
