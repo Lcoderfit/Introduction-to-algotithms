@@ -10,6 +10,9 @@ import "math"
 //先把数组分成两部分，然后对这两部分进行递归分治，最后将排好序的两部分合并起来
 //如果len(arr)为奇数，例如为3，mid = 3/2 = 1,
 //则前面arr[:mid]=> arr[:1]，前半部分的数组只有一个元素，后半部分有两个；长度为偶数则平分
+
+// 空间复杂度：归并排序每次结束调用的时候会把辅助数组释放掉，这样一来虽然总是有新的内存被申请，但也总有内存被释放；假设递归有x层，是一层一层按顺序执
+// 执行的，执行每一层时，所需要的内存为O(n)，执行完后就释放了，所以只需要O(n)的空间复杂度
 func MergeSort(arr []int) []int {
 	if len(arr) < 2 {
 		return arr
@@ -45,6 +48,7 @@ func MergeSort(arr []int) []int {
 	}
 	return merge
 }
+
 
 func MergeSort1(arr []int) {
 	if len(arr) < 2 {
