@@ -68,3 +68,52 @@ go build -o m.exe main.go
 * 先生成可执行文件，然后移动到GOBIN目录下
 ?????
 
+# 三、更新go版本
+## 3.1 Linux
+* 使用uname命令查看Ubuntu的系统架构(x86/x86-64/ARM64)
+可以得知当前的Linux系统是x86_64的架构
+```text
+root@iZuf6a99qngm2w94o1aqz3Z:/home/SoftWareForCoding# uname -a
+Linux iZuf6a99qngm2w94o1aqz3Z 4.4.0-117-generic #141-Ubuntu SMP Tue Mar 13 11:58:07 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+* 到[Go安装包下载页面](https://studygolang.com/dl)找到对应的Linux版本，不需要在这个页面，下载，直接复制安装包名称即可，后面通过wget命令下载
+
+  ![1634093587774](D:\PrivateProject\Introduction-to-algotithms\十五、Go语言程序设计\doc\img\Go安装包下载.png)
+
+* 如果系统中之前已经安装过go，则先通过go env GOROOT查看之前的安装位置，然后切换到该目录下
+```text
+root@iZuf6a99qngm2w94o1aqz3Z:/home/SoftWareForCoding# go env GOROOT
+/home/SoftWareForCoding/go
+```
+
+* 直接在Linux系统上通过wget命令安装
+后面的go1.17.2.linux-amd64.tar.gz改成与你的Linux版本对应的go安装包文件名
+```text
+wget https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz
+```
+
+* 先删除之前的安装目录，然后再解压新的安装包
+```text
+rm -rf /home/SoftWareForCoding/go && tar -C /home/SoftWareForCoding/ -xzf go1.17.2.linux-amd64.tar.gz
+```
+
+* 由于之前已经安装过go，所以环境遍历已经啥的之前已经配置好了，不需要再配置，直接用go version查看是否安装成功
+可以看到go版本已经更新
+```text
+root@iZuf6a99qngm2w94o1aqz3Z:/home/SoftWareForCoding# go version
+go version go1.17.2 linux/amd64
+```
+
+* 如果之前没有安装，则解压后需要添加环境变量
+```text
+vim /etc/profile
+
+# 然后添加以下三行(将GOROOT/GOPATH添加到环境变量中)，保存退出
+export GOROOT=/home/SoftWareForCoding/go
+export GOPATH=/home/GoProject
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# 执行使配置文件生效
+source /etc/profile
+```
